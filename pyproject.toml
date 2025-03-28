@@ -1,0 +1,57 @@
+[project]
+name = "sqlalchemy-unittest-demo"
+version = "2025.3.27.0"
+description = ""
+authors = [
+    {name = "François-Michel L'Heureux"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "sqlalchemy (>=2.0.39,<3.0.0)",
+    "psycopg[binary] (>=3.2.6,<4.0.0)",
+    "mypy (>=1.15.0,<2.0.0)",
+    "ruff (>=0.11.2,<0.12.0)",
+]
+
+[tool.poetry]
+packages = [{include = "src"}]
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+# See https://beta.ruff.rs/docs/rules/
+select = ["B", "D", "E", "F", "I", "T20", "W", "N", "YTT", "ASYNC", "S", "A", "C4", "DTZ", "T10", "PIE", "PT", "RSE", "SLF", "SIM", "TCH", "PTH", "PGH", "PLC", "RUF", "RET", "UP", "ISC", "LOG", "PYI", "Q", "SLOT", "TRY004", "TRY300", "PERF"]
+# RUF001 can fix false positives like "L'individu" -> "Lindividu" (French word)
+ignore = ["D1", "D401", "D413", "PTH123", "RUF001", "T201"]
+unfixable = ["F401", "F841", "PIE804"]
+pydocstyle = {convention = "google"}
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101", "SLF001"]
+
+[tool.mypy]
+python_version = "3.13"
+namespace_packages = true
+ignore_missing_imports = false
+check_untyped_defs = true
+no_implicit_optional = true
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_unused_configs = true
+warn_return_any = true
+warn_unreachable = true
+show_error_codes = true
+explicit_package_bases = true
